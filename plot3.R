@@ -30,7 +30,7 @@ png(filename="plot3.png", width = 800, height = 800)
 ggplot(data=dataset, aes(x=factor(year), y=tot, group=1, fill=year)) +
   geom_bar(colour="black", stat="identity", width=0.7) + facet_grid(. ~ type) +
   guides(fill=FALSE) +
-  ggtitle("Total Baltimore City PM2.5 Emissions by Type of Source") +
+  ggtitle("Total Baltimore City "~PM[2.5]~" Emissions by Type of Source") +
   xlab("Year") + ylab("Emissions (tons)") + theme_bw() +
   theme(axis.text=element_text(size=12), axis.title=element_text(size=14,face="bold"),
         plot.title=element_text(size=16, face="bold"))

@@ -52,7 +52,7 @@ png(filename="plot4.png", width = 800, height = 800)
 ggplot(data=coalSccDataSum, aes(x=factor(year), y=tot/1000, fill=year)) +
   geom_bar(colour="black", stat="identity", width=0.7) +
   guides(fill=FALSE) +
-  ggtitle("Total US Coal Combustion-Related Sources PM2.5 Emissions") +
+  ggtitle("Total US Coal Combustion-Related Sources "~PM[2.5]~" Emissions") +
   xlab("Year") + ylab("Emissions (thousands of tons)") + theme_bw() +
   theme(axis.text=element_text(size=12), axis.title=element_text(size=14,face="bold"),
         plot.title=element_text(size=16, face="bold"))

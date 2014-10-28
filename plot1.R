@@ -19,7 +19,7 @@ dataset = as.data.frame(ddply(NEI, ~ year, summarise, tot=sum(Emissions)))
 # create the plot using the base plotting system
 png(filename="plot1.png", width = 800, height = 800)
 barplot(dataset$tot/1000, col="orange",
-        main="Total US PM2.5 Emissions", xlab="Year", ylab="Emissions (thousands of tons)",
+        main="Total US "~PM[2.5]~" Emissions", xlab="Year", ylab="Emissions (thousands of tons)",
         cex.lab=1.3, cex.axis=1, cex.main=1.4,
         names.arg = c("1999", "2002", "2005", "2008"))
 dev.off()

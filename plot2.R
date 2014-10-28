@@ -20,7 +20,7 @@ dataset = as.data.frame(ddply(baltimore, ~ year, summarise, tot=sum(Emissions)))
 # create the plot using the base plotting system
 png(filename="plot2.png", width = 800, height = 800)
 barplot(dataset$tot, col="orange",
-        main="Total Baltimore City PM2.5 Emissions", xlab="Year", ylab="Emissions (tons)",
+        main="Total Baltimore City "~PM[2.5]~" Emissions", xlab="Year", ylab="Emissions (tons)",
         cex.lab=1.3, cex.axis=1, cex.main=1.4,
         names.arg = c("1999", "2002", "2005", "2008"))
 dev.off()
