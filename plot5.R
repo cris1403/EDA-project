@@ -55,7 +55,7 @@ png(filename="plot5.png", width = 800, height = 800)
 ggplot(data=vehicleSccDataSum, aes(x=factor(year), y=tot, fill=year)) +
   geom_bar(colour="black", stat="identity", width=0.7) +
   guides(fill=FALSE) +
-  ggtitle("Total Baltimore Motor Vehicles-Related Sources PM2.5 Emissions") +
+  ggtitle("Total Baltimore Motor Vehicles-Related Sources "~PM[2.5]~" Emissions") +
   xlab("Year") + ylab("Emissions (tons)") + theme_bw() +
   theme(axis.text=element_text(size=12), axis.title=element_text(size=14,face="bold"),
         plot.title=element_text(size=16, face="bold"))

@@ -83,5 +83,5 @@ p2 <- ggplot(data=changeOverTime, aes(x=factor(year), y=percchange, group=1, fil
             plot.title=element_text(size=15, face="bold"), strip.text.x = element_text(size = 12))
 
 png(filename="plot6.png", width = 800, height = 800)
-grid.arrange(p1, p2, ncol = 2, main = textGrob("Motor Vehicles PM2.5 Emissions", gp=gpar(fontsize=16,font=2)))
+grid.arrange(p1, p2, ncol = 2, main = textGrob("Motor Vehicles "~PM[2.5]~" Emissions", gp=gpar(fontsize=16,font=2)))
 dev.off()
