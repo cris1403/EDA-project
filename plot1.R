@@ -4,14 +4,17 @@
 # Using the base plotting system, make a plot showing the total PM2.5 emission from all sources 
 # for each of the years 1999, 2002, 2005, and 2008.
 #
-# I used a bar plot instead of a line graph because having data every 3 years, I don't consider
-# the Emissions variable as continous because I don't know its values for every year.
+# I used a bar plot instead of a line graph because - having one value every 3 years - I don't 
+# consider the Emissions variable as continous. Emissions clearly went down. 
 #################################################################################################
 
 rm(list=ls())
-library(plyr)
 
-NEI <- readRDS("summarySCC_PM25.rds")
+if (length(setdiff("plyr", rownames(installed.packages()))) > 0) {
+  install.packages(setdiff("plyr", rownames(installed.packages())))  
+}
+
+NEI = readRDS("summarySCC_PM25.rds")
 
 # total emissions by year
 dataset = as.data.frame(ddply(NEI, ~ year, summarise, tot=sum(Emissions)))

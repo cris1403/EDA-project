@@ -1,31 +1,34 @@
-#################################################################################################
+###########################################################################################################
 # Course Project 2 - Question 4
-# Across the United States, how have emissions from coal combustion-related sources 
-# changed from 1999-2008?
+# Across the United States, how have emissions from coal combustion-related sources changed from 1999-2008?
 #
+# Here the main problem is to find all the SCC related to coal combustion-related sources.
+# Here you find the whole list (http://www.state.nj.us/dep/aqm/es/scc.pdf). 
+# I explored from more general to more specific sources, looking for those words into different SCC levels: 
 #
-
-
-# Here the main problem was to find all the coal combustion-related sources among the SCC.
-# After having seen the complete list (http://www.state.nj.us/dep/aqm/es/scc.pdf), I took the 
-# decision to explore from more general to more specific sources, looking for those words: 
+#                             coal, lignite, coke, carbon, charcoal
 #
-#                 coal, lignite, coke, carbon, charcoal
+# I extracted all the descriptions containing at least one of those words (along the R script, search for 
+# the "s3" and the "s4" character vectors) and gathered the corresponding SCC levels ("scc3" and "scc4" 
+# data frames). Afterwords, I made a union between the two SCC subsetsSCC ("coalRelatedScc").
+# 
+# From the main NEI dataset, I took into account only data related to this "coalRelatedScc" subset and 
+# finally computed total emissions by year.
 #
-# I extracted all the descriptions containing at least one of those words (s3 and s4 character vectors)
-# and then the corresponding SCC levels (scc3 and scc4 data frames). 
-# Afterwords, I made a union between the two SCC subsets to have the final 
-# coal combustion-related sources' SCC set (coalRelatedScc).
-#################################################################################################
-
-
+# I used a bar plot instead of a line graph because - having one value every 3 years - I don't consider
+# the Emissions variable as continous. Looking at the graph, it's easy to see a decrease in emissions 
+# from coal combustion-related sources from 1999-2008.
+############################################################################################################
 
 rm(list=ls())
-library(plyr)
-library(ggplot2)
 
-NEI <- readRDS("summarySCC_PM25.rds")
-SCC <- readRDS("Source_Classification_Code.rds")
+packages <- c("ggplot2","plyr")
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+  install.packages(setdiff(packages, rownames(installed.packages())))  
+}
+
+NEI = readRDS("summarySCC_PM25.rds")
+SCC = readRDS("Source_Classification_Code.rds")
 
 sourceLevels3 = levels(SCC$SCC.Level.Three)
 selectedLevelThree = grep("[Cc]oal|[Ll]ignite|[Cc]oke|[Cc]arbon |[Cc]harcoal", sourceLevels3)
@@ -40,10 +43,10 @@ scc4 = subset(SCC, SCC.Level.Four %in% s4, select=c(SCC, SCC.Level.Four))
 
 coalRelatedScc = union(scc3$SCC, scc4$SCC)
 
-# take into account only data coming from specific SCCs
+# from the main dataset, take into account only data coming from specific SCCs
 coalSccData = subset(NEI, SCC %in% coalRelatedScc, select=c(Emissions, year))
 
-# total emissions by year
+# compute total emissions by year
 coalSccDataSum = as.data.frame(ddply(coalSccData, ~ year, summarise, tot=sum(Emissions)))
 
 

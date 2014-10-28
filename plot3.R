@@ -1,22 +1,23 @@
-#################################################################################################
+#######################################################################################################
 # Course Project 2 - Question 3
 # Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) variable, 
 # which of these four sources have seen decreases in emissions from 1999-2008 for Baltimore City? 
 # Which have seen increases in emissions from 1999-2008? 
 # Use the ggplot2 plotting system to make a plot answer this question.
 
-# I used a bar plot instead of a line graph because having data every 3 years, I don't consider
-# the Emissions variable as continous because I don't know its values for every year.
-# Checking the 4 facets, it's easy to understand if emissions increased or decreased 
-# from 1999-2008. 
-#################################################################################################
-
+# I used a bar plot instead of a line graph because - having one value every 3 years - I don't consider
+# the Emissions variable as continous. 
+# Checking the 4 facets, it's easy to see which kind of emissions increased or decreased from 1999-2008. 
+########################################################################################################
 
 rm(list=ls())
-library(plyr)
-library(ggplot2)
 
-NEI <- readRDS("summarySCC_PM25.rds")
+packages <- c("ggplot2","plyr")
+if (length(setdiff(packages, rownames(installed.packages()))) > 0) {
+  install.packages(setdiff(packages, rownames(installed.packages())))  
+}
+
+NEI = readRDS("summarySCC_PM25.rds")
 NEI$type = factor(NEI$type)
 
 # take into account only data about Baltimore City
